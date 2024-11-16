@@ -1,14 +1,14 @@
-def get_number():
+def get_number(): #Получение числа от пользователя.
     while True:
         try:
-            number = int(input("Введите число больше 999: "))
-            if number > 999:
+            number = int(input("Введите число больше 999: ")) #Попытка получить число от пользователя и преобразовать его в целое число.
+            if number > 999: #Проверяем, является ли введённое число больше 999.
                 return number
             else:
                 print("Число должно быть больше 999.")
         except ValueError:
             print("Неверный ввод! Пожалуйста, введите целое число.")
 
-number = get_number()
-thousands_digit = number // 1000 % 10
+number = get_number() #Присваиваем переменной 'number' возвращаемое функцией значение.
+thousands_digit = number // 1000 % 10 #Вычисляем цифру разряда 1000: делим число на 1000 без остатка и берём последнюю цифру результата.
 print(f'Разряд 1000 = {thousands_digit}')
