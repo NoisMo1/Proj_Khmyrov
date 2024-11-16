@@ -1,9 +1,14 @@
-#Запрос ввода целого числа больше 999
-a = (input("Введите число больше 999: "))
-while type(a) != int: # обработка исключений
-    try:
-        a = int(a)
-    except ValueError:
-        print("Неправильно ввели!")
-        a = input("Введите число больше 999: ")
-print('Разряд 1000 =', a//1000%10) #Делим число a на 1000 с округлением вниз, затем берем остаток от деления на 10
+def get_number():
+    while True:
+        try:
+            number = int(input("Введите число больше 999: "))
+            if number > 999:
+                return number
+            else:
+                print("Число должно быть больше 999.")
+        except ValueError:
+            print("Неверный ввод! Пожалуйста, введите целое число.")
+
+number = get_number()
+thousands_digit = number // 1000 % 10
+print(f'Разряд 1000 = {thousands_digit}')
