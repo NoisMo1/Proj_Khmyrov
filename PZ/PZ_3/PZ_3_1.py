@@ -1,14 +1,29 @@
 #Дано трехзначное число. Проверить истинность высказывания: «Цифры данного
 #числа образуют возрастающую или убывающую последовательность».
-def is_sequence_increasing_or_decreasing(number):
-    digits = str(number) #Преобразуем число в строку для удобства работы с отдельными цифрами
-    if len(digits) != 3: #Проверяем, что длина числа равна трем
+def check_sequence(number):
+    try:
+        # Убедимся, что число трехзначное
+        if 100 <= number <= 999:
+            # Извлекаем цифры
+            hundreds = number // 100
+            tens = (number // 10) % 10
+            units = number % 10
+            # Проверяем на возрастающую и убывающую последовательность
+            is_increasing = hundreds < tens < units
+            is_decreasing = hundreds > tens > units
+
+            return is_increasing or is_decreasing
+        else:
+            return False  # Не трехзначное число
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
         return False
-    increasing = digits[0] < digits[1] < digits[2] #Проверяем возрастание
-    decreasing = digits[0] > digits[1] > digits[2] #Проверяем убывание
-    return increasing or decreasing  #Возвращаем истину, если выполнено хотя бы одно условие
-number = int(input("Введите трехзначное число: "))
-if is_sequence_increasing_or_decreasing(number):
-    print("Цифры числа образуют возрастающую или убывающую последовательность")
-else:
-    print("Цифры числа не образуют возрастающую или убывающую последовательность")
+# Пример использования
+try:
+    number = int(input("Введите трехзначное число: "))
+    if check_sequence(number):
+        print("Цифры образуют возрастающую или убывающую последовательность.")
+    else:
+        print("Цифры не образуют возрастающую или убывающую последовательность.")
+except ValueError:
+    print("Пожалуйста, введите корректное целое число.")
