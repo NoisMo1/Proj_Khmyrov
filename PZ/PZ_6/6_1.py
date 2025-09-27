@@ -1,35 +1,24 @@
-#Дан целочисленный список размера N, не содержащий одинаковых чисел.
-#Проверить, образуют ли его элементы арифметическую прогрессию. Если образуют,
-#то вывести разность прогрессии, если нет — вывести 0.
-def is_arithmetic_progression(lst):
-    if len(lst) < 2:
-        return 0  # Список слишком короткий для прогрессии
+#Дан список размера N и целые числа К и L (1 < K L ≤ N).
+#Найти среднее арифметическое всех элементов списка, 
+#кроме элементов с номерами от к до включительно.
+n = int(input("Введите размер списка N: "))
+k = int(input("Введите K (начало исключаемого диапазона): "))
+l = int(input("Введите L (конец исключаемого диапазона): "))
 
-    diff = lst[1] - lst[0]
+print("Введите", n, "целых чисел:")
+spisok = []
+for i in range(n):
+    chislo = int(input())
+    spisok.append(chislo)
 
-    for i in range(2, len(lst)):
-        if lst[i] - lst[i - 1] != diff:
-            return 0
+novy_spisok = []
+for i in range(n):
+    if i + 1 < k or i + 1 > l:
+        novy_spisok.append(spisok[i])
 
-    return diff
-
-
-def main():
-    try:
-        N = int(input("Введите размер списка N: "))
-        if N < 2:
-            raise ValueError("Размер списка должен быть больше 1")
-
-        lst = []
-        for _ in range(N):
-            num = int(input("Введите элемент списка: "))
-            lst.append(num)
-
-        result = is_arithmetic_progression(lst)
-        print(result)
-    except ValueError as e:
-        print("Ошибка:", e)
-
-
-# Запуск основной функции
-main()
+if len(novy_spisok) == 0:
+    print("Нет элементов для вычисления среднего.")
+else:
+    srednee = sum(novy_spisok) / len(novy_spisok)
+    print("Среднее арифметическое:", srednee)
+    
